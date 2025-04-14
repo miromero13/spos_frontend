@@ -49,6 +49,29 @@ export const fetchData = async (url: string, options?: RequestInit, typeBlob?: b
   return !typeBlob ? await response.json() : response
 }
 
+export const fetchDataNoAuth = async (url: string, options?: RequestInit, typeBlob?: boolean) => {
+  const token = getStorage(STORAGE_TOKEN)
+  const authorizationHeader = { Authorization: `Bearer ${token}` }
+  const requestOptions: RequestInit = {
+    ...options,
+    headers: {
+      ...options?.headers
+      // ...authorizationHeader
+    }
+  }
+
+  if (!options || (options && !(options.body instanceof FormData))) {
+    requestOptions.headers = {
+      ...requestOptions.headers,
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const response = await fetch(url, requestOptions)
+  await handleResponseErrors(response)
+  return !typeBlob ? await response.json() : response
+}
+
 type QueryOptions = Record<string, string | number | undefined>
 
 export const generateQueryParamsGeneric = (queryOption: QueryOptions): string => {

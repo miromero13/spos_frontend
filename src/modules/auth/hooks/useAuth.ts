@@ -10,7 +10,7 @@ const useAuthLogin = () => {
 }
 
 const useCheckToken = () => {
-  const { trigger, isMutating, error } = useSWRMutation<any, ResponseError, string, { token: string }>(API_BASEURL + ENDPOINTS.API + '/checkToken', checkToken)
+  const { trigger, isMutating, error } = useSWRMutation<any, ResponseError, string, { token: string }>(API_BASEURL + ENDPOINTS.CHECK_TOKEN, checkToken)
   return { checkToken: trigger, isChekingToken: isMutating, errorToken: error }
 }
 

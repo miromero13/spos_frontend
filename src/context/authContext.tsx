@@ -1,19 +1,23 @@
 import { createContext, useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { STORAGE_BRANCH, STORAGE_TOKEN, STORAGE_USER, authStatus, getStorage, removeStorage } from '../utils'
+import { ENDPOINTS, STORAGE_BRANCH, STORAGE_TOKEN, STORAGE_USER, authStatus, getStorage, removeStorage } from '../utils'
 import { type AuthContextState } from '../models'
 import { createUser, resetUser } from '@/redux/slices/user.slice'
 import { type ChildrenProps } from '@/models/common.model'
-import { useAuthLogin, useAuthLoginGoogle, useCheckToken } from '@/modules/auth/hooks/useAuth'
+import { useAuthLoginGoogle, useCheckToken } from '@/modules/auth/hooks/useAuth'
 import { type AuthLogin } from '@/modules/auth/models/login.model'
+import { useCreateResource } from '@/hooks/useApiResource'
 
 export const AuthContext = createContext<AuthContextState>({} as AuthContextState)
 
 export const AuthProvider = ({ children }: ChildrenProps) => {
   const [status, setStatus] = useState<authStatus>(authStatus.loading)
   const [error, setError] = useState<string[]>([])
-  const { authLogin, isLoggingIn } = useAuthLogin()
+  // const { authLogin, isLoggingIn } = useAuthLogin()
+  const { createResource: authLogin, isMutating: isLoggingIn } = useCreateResource({
+    endpoint: ENDPOINTS.LOGIN
+  })
   const { authLoginGoogle, isLoggingInGoogle } = useAuthLoginGoogle()
   const { checkToken } = useCheckToken()
 
@@ -70,7 +74,7 @@ export const AuthProvider = ({ children }: ChildrenProps) => {
     try {
       if (formData.password === '') throw new Error('La contraseña es requerida')
       setStatus(authStatus.loading)
-      const userResponse = await authLogin(formData)
+      const userResponse = await authLogin({ username: formData.email, password: formData.password })
       dispatch(createUser(userResponse))
       setStatus(authStatus.authenticated)
     } catch (error: Error | any) {

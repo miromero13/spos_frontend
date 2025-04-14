@@ -12,9 +12,7 @@ export const useAuthorization = () => {
   const verifyPermission = (permissionRequired: PERMISSION[]) => {
     if (status === authStatus.authenticated) {
       return permissionRequired.some((permission) =>
-        data?.role?.permissions?.some((rolePermission) =>
-          rolePermission.permission.name === permission
-        )
+        String(data?.role) === String(permission)
       )
     } else {
       return false

@@ -11,7 +11,6 @@ export enum PrivateRoutes {
   // workspaces
   WORKSPACE = '/workspace/:id',
 
-
   SETTINGS = '/configuracion',
   // users
   USER = '/usuarios',

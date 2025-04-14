@@ -1,4 +1,4 @@
-import { convertObjectToFormData, fetchData } from "@/utils"
+import { convertObjectToFormData, fetchData, fetchDataNoAuth } from '@/utils'
 
 export interface ApiResponse<T = unknown> {
   statusCode?: number
@@ -7,7 +7,6 @@ export interface ApiResponse<T = unknown> {
   data?: T
   countData?: number
 }
-
 
 const getAllResource = async <T>(url: string): Promise<ApiResponse<T[]>> => {
   const options: RequestInit = { method: 'GET' }
@@ -29,6 +28,15 @@ const createResource = async <T>(url: string, { arg }: { arg: T }): Promise<void
   return response
 }
 
+const createResourceNoAuth = async <T>(url: string, { arg }: { arg: T }): Promise<void> => {
+  const options: RequestInit = {
+    method: 'POST',
+    body: JSON.stringify(arg)
+  }
+  const response = await fetchDataNoAuth(url, options)
+  return response
+}
+
 const createResourceWithImage = async <T>(url: string, { arg }: { arg: T }): Promise<void> => {
   const formData = convertObjectToFormData(arg as Record<string, unknown>)
   const options: RequestInit = {
@@ -44,11 +52,12 @@ const updateResource = async <T>(url: string, { arg }: { arg: T }): Promise<void
     method: 'PATCH',
     body: JSON.stringify(arg)
   }
+
   const id = (arg as Record<string, unknown>).id
+  const isValidId = typeof id === 'string' || typeof id === 'number'
+  const finalUrl = isValidId ? `${url}/${id}` : url
 
-  console.log(url + id ? `/${id}` : '')
-
-  const response = await fetchData(url + id ? `/${id}` : '', options)
+  const response = await fetchData(finalUrl, options)
   return response
 }
 

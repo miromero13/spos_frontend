@@ -38,6 +38,8 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/promise-function-async": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/naming-convention": "off",
     // ignorar variables no utilizadas
     "@typescript-eslint/no-unused-vars": [
       "warn",

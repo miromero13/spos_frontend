@@ -1,7 +1,7 @@
 import { createElement, lazy } from 'react'
 import { userRoutes } from '.'
 import { PrivateRoutes, type Route } from '@/models/routes.model'
-import { type PERMISSION } from '@/modules/auth/utils/permissions.constants'
+import { PERMISSION } from '@/modules/auth/utils/permissions.constants'
 
 const DashboardPage = lazy(() => import('@modules/dashboard'))
 // const SettingPage = lazy(() => import('@modules/settings/pages/setting'))
@@ -22,7 +22,7 @@ export const PrivateAllRoutes: Route[] = [
   {
     path: PrivateRoutes.WORKSPACE,
     element: createElement(WorkspacePage),
-    permissions: [] as PERMISSION[]
+    permissions: [PERMISSION.CASHIER, PERMISSION.ADMIN]
   },
   // {
   //   path: PrivateRoutes.SETTINGS,

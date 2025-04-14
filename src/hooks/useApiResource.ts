@@ -2,14 +2,14 @@ import useSWRMutation from 'swr/mutation'
 import useSWR from 'swr'
 import { filterStateDefault, useFilterData } from './useFilterData'
 import { buildUrl } from '@/utils'
-import { ResponseError } from '@/utils/response-error.utils'
-import { ApiResponse, createResource, createResourceWithImage, deleteResource, getAllResource, getResource, updateResource } from '@/services/crud.service'
+import { type ResponseError } from '@/utils/response-error.utils'
+import { type ApiResponse, createResource, createResourceWithImage, deleteResource, getAllResource, getResource, updateResource } from '@/services/crud.service'
 
 interface ParamResurce {
   endpoint: string
   id?: string
   query?: string
-  isImage?: boolean,
+  isImage?: boolean
   isPagination?: boolean
 }
 
