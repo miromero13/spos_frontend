@@ -1,72 +1,41 @@
-// import { createElement, lazy } from 'react'
-// import { PrivateRoutes, type Route } from '@/models/routes.model'
-// import { type PERMISSION } from '@/modules/auth/utils/permissions.constants'
+import { createElement, lazy } from 'react'
+import { PrivateRoutes, type Route } from '@/models/routes.model'
+import { PERMISSION } from '@/modules/auth/utils/permissions.constants'
 
-import { type Route } from '@/models'
-
-// const ProfilePage = lazy(() => import('@/modules/users/pages/profile'))
-// const ProfileForm = lazy(() => import('@/modules/users/pages/profile/components/profile-form'))
-// const UserPage = lazy(() => import('@modules/users/pages/users'))
-// const UserFormPage = lazy(() => import('@modules/users/pages/users/components/user-form'))
-// const RolesPage = lazy(() => import('@modules/auth/pages/roles'))
-// const RolesFormPage = lazy(() => import('@modules/auth/pages/roles/components/role-form'))
-// const PermissionsPage = lazy(() => import('@/modules/auth/pages/permissions'))
-// const PermissionsFormPage = lazy(() => import('@/modules/auth/pages/permissions/components/permissions-form'))
+const UserPage = lazy(() => import('@modules/users/pages/users'))
+const UserFormPage = lazy(() => import('@modules/users/pages/users/components/user-form'))
+const CustomerPage = lazy(() => import('@modules/users/pages/customers'))
+const CustomerFormPage = lazy(() => import('@modules/users/pages/customers/components/customer-form'))
 
 export const userRoutes: Route[] = [
-  // {
-  //   path: PrivateRoutes.PROFILE,
-  //   element: createElement(ProfilePage),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.PROFILE_UPDATE,
-  //   element: createElement(ProfileForm, { buttonText: 'Actualizar', title: 'Actualizar su Cuenta' }),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.USER,
-  //   element: createElement(UserPage),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.USER_CREAR,
-  //   element: createElement(UserFormPage, { buttonText: 'Guardar Usuario', title: 'Crear Usuario' }),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.USER_EDIT,
-  //   element: createElement(UserFormPage, { buttonText: 'Editar Usuario', title: 'Actualizar Usuario' }),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.ROLES,
-  //   element: createElement(RolesPage),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.ROLE_FORM,
-  //   element: createElement(RolesFormPage, { title: 'Crear Rol', buttonText: 'Guardar Rol' }),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.ROLE_EDIT,
-  //   element: createElement(RolesFormPage, { title: 'Actualizar Rol', buttonText: 'Guardar Rol' }),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.PERMISSIONS,
-  //   element: createElement(PermissionsPage),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.PERMISSIONS_CREATE,
-  //   element: createElement(PermissionsFormPage, { title: 'Crear Permiso', buttonText: 'Guardar Permiso' }),
-  //   permissions: [] as PERMISSION[]
-  // },
-  // {
-  //   path: PrivateRoutes.PERMISSIONS_EDIT,
-  //   element: createElement(PermissionsFormPage, { title: 'Actualizar Permiso', buttonText: 'Guardar Permiso' }),
-  //   permissions: [] as PERMISSION[]
-  // }
+  {
+    path: PrivateRoutes.USER,
+    element: createElement(UserPage),
+    permissions: [PERMISSION.ADMIN] as PERMISSION[]
+  },
+  {
+    path: PrivateRoutes.USER_CREATE,
+    element: createElement(UserFormPage, { buttonText: 'Guardar Cajero', title: 'Crear Cajero' }),
+    permissions: [PERMISSION.ADMIN] as PERMISSION[]
+  },
+  {
+    path: PrivateRoutes.USER_EDIT,
+    element: createElement(UserFormPage, { buttonText: 'Editar Cajero', title: 'Actualizar Cajero' }),
+    permissions: [PERMISSION.ADMIN] as PERMISSION[]
+  },
+  {
+    path: PrivateRoutes.CUSTOMER,
+    element: createElement(CustomerPage),
+    permissions: [PERMISSION.ADMIN, PERMISSION.CASHIER] as PERMISSION[]
+  },
+  {
+    path: PrivateRoutes.CUSTOMER_CREATE,
+    element: createElement(CustomerFormPage, { title: 'Crear Cliente', buttonText: 'Guardar Cliente' }),
+    permissions: [PERMISSION.ADMIN, PERMISSION.CASHIER] as PERMISSION[]
+  },
+  {
+    path: PrivateRoutes.CUSTOMER_EDIT,
+    element: createElement(CustomerFormPage, { title: 'Actualizar Cliente', buttonText: 'Guardar Cliente' }),
+    permissions: [PERMISSION.ADMIN, PERMISSION.CASHIER] as PERMISSION[]
+  }
 ]
