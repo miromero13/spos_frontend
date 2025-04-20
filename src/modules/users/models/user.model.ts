@@ -9,6 +9,7 @@ export interface User extends ApiBase {
   role: string
   is_active: boolean
 }
+
 export interface CreateUser extends Partial<Omit<User, 'password'>> {
   password: string
 }

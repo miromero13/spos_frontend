@@ -1,6 +1,6 @@
 import { PrivateRoutes } from '@/models'
 import { PERMISSION } from '@/modules/auth/utils/permissions.constants'
-import { CircleDollarSignIcon, User, UserCogIcon, UsersIcon } from 'lucide-react'
+import { CircleDollarSignIcon, ShoppingBagIcon, User, UserCogIcon, UsersIcon } from 'lucide-react'
 import { createElement } from 'react'
 
 export interface MenuHeaderRoute {
@@ -35,6 +35,14 @@ export const MenuSideBar: MenuHeaderRoute[] = [
   {
     label: 'Gestion de Ventas',
     icon: createElement(CircleDollarSignIcon, { width: 20, height: 20 }),
-    permissions: [PERMISSION.ADMIN, PERMISSION.CASHIER] as PERMISSION[]
+    permissions: [PERMISSION.ADMIN, PERMISSION.CASHIER] as PERMISSION[],
+    children: [
+      {
+        label: 'Productos',
+        icon: createElement(ShoppingBagIcon, { width: 20, height: 20 }),
+        path: PrivateRoutes.PRODUCT,
+        permissions: [PERMISSION.ADMIN] as PERMISSION[]
+      }
+    ]
   }
 ]

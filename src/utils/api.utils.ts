@@ -9,7 +9,13 @@ export const ENDPOINTS = {
   USER: '/api/users/',
 
   // customers
-  CUSTOMER: '/api/customers/'
+  CUSTOMER: '/api/customers/',
+
+  // product
+  PRODUCT: '/api/products/',
+
+  // category
+  CATEGORY: '/api/categories/'
 }
 
 export const API_BASEURL = AppConfig.API_URL
