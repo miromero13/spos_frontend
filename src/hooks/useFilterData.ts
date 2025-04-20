@@ -1,12 +1,11 @@
 import { type ChangeEvent, useState } from 'react'
 
-import { Order, type FilterOptions } from '@/models'
+import { type FilterOptions } from '@/models'
 import { generateQueryParams } from '@/utils'
 
 export const filterStateDefault: FilterOptions = {
   offset: 0,
-  limit: 5,
-  order: Order.ASC
+  limit: 5
 }
 
 export const useFilterData = (filterState: FilterOptions) => {
@@ -18,7 +17,7 @@ export const useFilterData = (filterState: FilterOptions) => {
   }
 
   const changeOrder = (e: ChangeEvent<HTMLSelectElement>) => {
-    const order = e.target.value as Order
+    const order = e.target.value
     setFilterOptions((prevFilterOptions) => ({ ...prevFilterOptions, order }))
   }
 

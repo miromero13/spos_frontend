@@ -2,11 +2,10 @@ import { STORAGE_TOKEN, getStorage } from '.'
 import { type ApiResponse, type FilterOptions } from '../models'
 import { ResponseError } from './response-error.utils'
 
-export const generateQueryParams = ({ offset, limit, order, ...rest }: FilterOptions): string => {
+export const generateQueryParams = ({ offset, limit, ...rest }: FilterOptions): string => {
   const queryParams = new URLSearchParams({
     offset: offset.toString(),
-    limit: limit.toString(),
-    order: order.toString()
+    limit: limit.toString()
   })
 
   Object.entries(rest).forEach(([key, value]) => {

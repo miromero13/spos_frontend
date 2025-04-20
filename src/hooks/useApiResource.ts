@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import { filterStateDefault, useFilterData } from './useFilterData'
 import { buildUrl } from '@/utils'
 import { type ResponseError } from '@/utils/response-error.utils'
-import { type ApiResponse, createResource, createResourceWithImage, deleteResource, getAllResource, getResource, updateResource } from '@/services/crud.service'
+import { type ApiResponse, createResource, createResourceWithImage, createResourceNoAuth, deleteResource, getAllResource, getResource, updateResource } from '@/services/crud.service'
 
 interface ParamResurce {
   endpoint: string
@@ -21,6 +21,16 @@ const useCreateResource = <TData>({ endpoint, query, isImage }: ParamResurce) =>
 
   return { createResource: trigger, isMutating, error }
 }
+
+const useCreateResourceNoAuth = <TData>({ endpoint, query, isImage }: ParamResurce) => {
+  const url = buildUrl({ endpoint, query })
+  const { trigger, isMutating, error } = useSWRMutation<Promise<void>, ResponseError, string, TData>(
+    url, query ? getResource : createResourceNoAuth
+  )
+
+  return { createResource: trigger, isMutating, error }
+}
+
 const useGetResource = <TData>({ endpoint, id, query }: ParamResurce) => {
   const url = buildUrl({ endpoint, id, query })
   const { data, isLoading, error, isValidating, mutate } = useSWR<TData, ResponseError>(url, getResource)
@@ -49,4 +59,4 @@ const useDeleteResource = (endpoint: string) => {
   return { deleteResource: trigger, error, isMutating }
 }
 
-export { useCreateResource, useGetAllResource, useGetResource, useUpdateResource, useDeleteResource }
+export { useCreateResource, useGetAllResource, useGetResource, useUpdateResource, useDeleteResource, useCreateResourceNoAuth }
