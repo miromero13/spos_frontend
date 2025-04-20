@@ -66,4 +66,4 @@ const deleteResource = async (url: string): Promise<void> => {
   await fetchData(url, options)
 }
 
-export { getAllResource, createResource, updateResource, getResource, deleteResource, createResourceWithImage }
+export { getAllResource, createResource, updateResource, getResource, deleteResource, createResourceWithImage, createResourceNoAuth }
