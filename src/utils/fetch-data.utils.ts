@@ -49,8 +49,6 @@ export const fetchData = async (url: string, options?: RequestInit, typeBlob?: b
 }
 
 export const fetchDataNoAuth = async (url: string, options?: RequestInit, typeBlob?: boolean) => {
-  const token = getStorage(STORAGE_TOKEN)
-  const authorizationHeader = { Authorization: `Bearer ${token}` }
   const requestOptions: RequestInit = {
     ...options,
     headers: {

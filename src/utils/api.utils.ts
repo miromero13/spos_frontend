@@ -4,7 +4,12 @@ export const ENDPOINTS = {
   // auth
   API: '/api',
   LOGIN: '/api/auth/login-admin/',
-  CHECK_TOKEN: '/api/auth/check-token/'
+  CHECK_TOKEN: '/api/auth/check-token/',
+  // users
+  USER: '/api/users/',
+
+  // customers
+  CUSTOMER: '/api/customers/'
 }
 
 export const API_BASEURL = AppConfig.API_URL
