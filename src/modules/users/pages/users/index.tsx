@@ -1,7 +1,7 @@
 import { toast } from 'sonner'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronLeftIcon, File, ListFilter, MoreHorizontal, PlusCircle, Search, Trash } from 'lucide-react'
+import { ChevronLeftIcon, ListFilter, MoreHorizontal, PlusCircle, Search, Trash } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -12,16 +12,16 @@ import Skeleton from '@/components/shared/skeleton'
 import Pagination from '@/components/shared/pagination'
 import { useDeleteUser, useGetAllUser } from '../../hooks/useUser'
 import { type User } from '../../models/user.model'
-import { Badge } from '@/components/ui/badge'
 import { useHeader } from '@/hooks'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 import { Input } from '@/components/ui/input'
 import useDebounce from '@/hooks/useDebounce'
+import { Badge } from '@/components/ui/badge'
 
 const UserPage = (): JSX.Element => {
   useHeader([
     { label: 'Dashboard', path: PrivateRoutes.DASHBOARD },
-    { label: 'Usuarios' }
+    { label: 'Cajeros' }
   ])
   const navigate = useNavigate()
   const { allUsers, countData, isLoading, mutate, filterOptions, newPage, prevPage, setOffset, search } = useGetAllUser()
@@ -35,12 +35,12 @@ const UserPage = (): JSX.Element => {
       success: () => {
         void mutate()
         setTimeout(() => {
-          navigate(PrivateRoutes.USER, { replace: true })
+          navigate(PrivateRoutes.USER_CREATE, { replace: true })
         }, 1000)
-        return 'Usuario eliminado exitosamente'
+        return 'Cajero eliminado exitosamente'
       },
       error(error) {
-        return error.errorMessages[0] ?? 'Puede que el usuario tenga permisos asignados, por lo que no se puede eliminar'
+        return error.errorMessages[0] ?? 'Puede que el cajero tenga permisos asignados, por lo que no se puede eliminar'
       }
     })
     setIsDialogOpen(false)
@@ -80,18 +80,19 @@ const UserPage = (): JSX.Element => {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Filtrar por</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuCheckboxItem checked>Active</DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem checked>Name</DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem checked>Rol</DropdownMenuCheckboxItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button size="sm" variant="outline" className="h-8 gap-1"><File className="h-3.5 w-3.5" /></Button>
-        <Button onClick={() => { navigate(PrivateRoutes.USER_CREAR) }} size="sm" className="h-8 gap-1">
+        {/* <Button size="sm" variant="outline" className="h-8 gap-1"><File className="h-3.5 w-3.5" /></Button> */}
+        <Button onClick={() => { navigate(PrivateRoutes.USER_CREATE) }} size="sm" className="h-8 gap-1">
           <PlusCircle className="h-3.5 w-3.5" />
           <span className="sr-only lg:not-sr-only sm:whitespace-nowrap">Agregar</span>
         </Button>
       </div>
       <Card x-chunk="dashboard-06-chunk-0" className='flex flex-col overflow-hidden w-full relative'>
         <CardHeader>
-          <CardTitle>Todos los Usuarios</CardTitle>
+          <CardTitle>Todos los Cajeros</CardTitle>
         </CardHeader>
         <CardContent className='overflow-hidden relative w-full'>
           <div className='overflow-x-auto'>
@@ -100,8 +101,7 @@ const UserPage = (): JSX.Element => {
                 <TableRow>
                   <TableHead>Nombre</TableHead>
                   <TableHead>Email</TableHead>
-                  <TableHead>Rol</TableHead>
-                  <TableHead>Sucursal</TableHead>
+                  {/* <TableHead>Rol</TableHead> */}
                   <TableHead>Estado</TableHead>
                   <TableHead><span className='sr-only'>Opciones</span></TableHead>
                 </TableRow>
@@ -113,11 +113,10 @@ const UserPage = (): JSX.Element => {
                     <TableRow key={user.id}>
                       <TableCell>{user.name}</TableCell>
                       <TableCell>{user.email}</TableCell>
-                      <TableCell>{user.role.name}</TableCell>
-                      <TableCell>{user.branch ? user.branch.name : '-'}</TableCell>
+                      {/* <TableCell>{user.role}</TableCell> */}
                       <TableCell>
-                        <Badge variant={user.isActive ? 'default' : 'outline'}>
-                          {user.isActive ? 'Activo' : 'Inactivo'}
+                        <Badge variant={user.is_active ? 'default' : 'outline'}>
+                          {user.is_active ? 'Activo' : 'Inactivo'}
                         </Badge>
                       </TableCell>
                       <TableCell>
@@ -136,29 +135,29 @@ const UserPage = (): JSX.Element => {
                                 <AlertDialogTrigger asChild className='w-full px-2 py-1.5'>
                                   <div
                                     onClick={(event) => { event.stopPropagation() }}
-                                    className={`${user.isActive ? 'text-danger' : ''} flex items-center`}
+                                    className={`${user.is_active ? 'text-danger' : ''} flex items-center`}
                                   >
-                                    {user.isActive
+                                    {user.is_active
                                       ? <><Trash className="mr-2 h-4 w-4" />Eliminar</>
                                       : 'Activar'}
                                   </div>
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
                                   <AlertDialogHeader>
-                                    <AlertDialogTitle>{user.isActive ? 'Eliminar usuario' : 'Activar usuario'}</AlertDialogTitle>
+                                    <AlertDialogTitle>{user.is_active ? 'Eliminar cajero' : 'Activar cajero'}</AlertDialogTitle>
                                   </AlertDialogHeader>
-                                  {user.isActive
+                                  {user.is_active
                                     ? <>
-                                      <AlertDialogDescription>Esta acción eliminará el usuario, no se puede deshacer.</AlertDialogDescription>
+                                      <AlertDialogDescription>Esta acción eliminará el cajero, no se puede deshacer.</AlertDialogDescription>
                                       <AlertDialogDescription>¿Estás seguro que deseas continuar?</AlertDialogDescription>
                                     </>
                                     : <AlertDialogDescription>
-                                      Para activar el usuario deberá contactarse con un administrador del sistema.
+                                      Para activar el ajero deberá contactarse con un administrador del sistema.
                                     </AlertDialogDescription>
                                   }
                                   <AlertDialogFooter>
                                     <AlertDialogCancel className='h-fit'>Cancelar</AlertDialogCancel>
-                                    {user.isActive &&
+                                    {user.is_active &&
                                       <AlertDialogAction className='h-full' onClick={() => { deletePermanentlyUser(user.id) }}>
                                         Continuar
                                       </AlertDialogAction>}

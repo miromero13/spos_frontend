@@ -2,7 +2,7 @@ import useSWRMutation from 'swr/mutation'
 import { createUser, deleteUser, getAllUser, getUser, updateUser } from '../services/user.service'
 import { API_BASEURL, ENDPOINTS } from '@/utils'
 import { type ResponseError } from '@/utils/response-error.utils'
-import { type User, type CreateUser, type UpdateUser } from '../models/user.model'
+import { type FormUser, type CreateUser, type UpdateUser } from '../models/user.model'
 import useSWR from 'swr'
 import { filterStateDefault, useFilterData } from '@/hooks/useFilterData'
 import { type ApiResponse } from '@/models'
@@ -13,7 +13,7 @@ const useCreateUser = () => {
 }
 
 const useGetUser = (id?: string) => {
-  const { data, isLoading, error, isValidating } = useSWR<User, ResponseError>(id ? API_BASEURL + ENDPOINTS.USER + `/${id}` : null, getUser)
+  const { data, isLoading, error, isValidating } = useSWR<FormUser, ResponseError>(id ? API_BASEURL + ENDPOINTS.USER + `${id}/` : null, getUser)
   return { user: data, isLoading, error, isValidating }
 }
 
@@ -32,10 +32,5 @@ const useDeleteUser = () => {
   const { trigger, error, isMutating } = useSWRMutation<Promise<void>, ResponseError, string, string>(API_BASEURL + ENDPOINTS.USER, deleteUser)
   return { deleteUser: trigger, error, isMutating }
 }
-
-// const useDeleteRole = () => {
-//   const { trigger, error, isMutating } = useSWRMutation<Promise<void>, ResponseError, string, string>(API_BASEURL + ENDPOINTS.ROLE, deleteRole)
-//   return { deleteRole: trigger, error, isMutating }
-// }
 
 export { useCreateUser, useGetAllUser, useGetUser, useUpdateUser, useDeleteUser }

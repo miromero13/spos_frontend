@@ -25,14 +25,11 @@ const updateUser = async (url: string, { arg }: { arg: UpdateUser }): Promise<vo
       name: arg?.name,
       email: arg?.email,
       password: arg?.password,
-      gender: arg?.gender,
-      address: arg?.address,
       phone: arg?.phone,
-      role: arg?.role,
-      branch: arg?.branch
+      role: arg?.role
     })
   }
-  await fetchData(`${url}/${arg.id}`, options)
+  await fetchData(`${url}${arg.id}/`, options)
 }
 const getAllUser = async (url: string): Promise<ApiResponse> => {
   const options: RequestInit = { method: 'GET' }
@@ -43,7 +40,7 @@ const getAllUser = async (url: string): Promise<ApiResponse> => {
 const deleteUser = async (url: string, { arg }: { arg: string }): Promise<void> => {
   const id = arg
   const options: RequestInit = { method: 'DELETE' }
-  await fetchData(`${url}/${id}`, options)
+  await fetchData(`${url}${id}/`, options)
 }
 
 export { createUser, getAllUser, getUser, updateUser, deleteUser }
