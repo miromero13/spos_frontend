@@ -3,7 +3,6 @@ import { type User, type CreateUser, type UpdateUser } from '../models/user.mode
 import { type ApiResponse } from '@/models'
 
 const createUser = async (url: string, { arg }: { arg: CreateUser }): Promise<void> => {
-  console.log(arg)
   const options: RequestInit = {
     method: 'POST',
     body: JSON.stringify(arg)

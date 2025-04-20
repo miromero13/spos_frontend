@@ -3,7 +3,6 @@ import { type Customer, type CreateCustomer, type UpdateCustomer } from '../mode
 import { type ApiResponse } from '@/models'
 
 const createCustomer = async (url: string, { arg }: { arg: CreateCustomer }): Promise<void> => {
-  console.log(arg)
   const options: RequestInit = {
     method: 'POST',
     body: JSON.stringify(arg)
