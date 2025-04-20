@@ -47,7 +47,7 @@ const LoginPage = (): JSX.Element => {
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold flex items-center justify-center gap-2">
-              <MapPinned width={30} height={30} /> Inmovia{' '}
+              <MapPinned width={30} height={30} /> Electropos{' '}
             </h1>
             <p className="text-balance text-muted-foreground">
               Ingrese su correo electrónico a continuación para iniciar sesión

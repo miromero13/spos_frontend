@@ -5,7 +5,7 @@ import { type AuthLogin } from '../models/login.model'
 import { API_BASEURL, ENDPOINTS } from '@/utils'
 
 const useAuthLogin = () => {
-  const { trigger, isMutating, error } = useSWRMutation<any, ResponseError, string, AuthLogin>(API_BASEURL + ENDPOINTS.API + '/login', userLogin)
+  const { trigger, isMutating, error } = useSWRMutation<any, ResponseError, string, AuthLogin>(API_BASEURL + ENDPOINTS.LOGIN, userLogin)
   return { authLogin: trigger, isLoggingIn: isMutating, errorLogin: error }
 }
 

@@ -1,4 +1,4 @@
-import { STORAGE_TOKEN, STORAGE_USER, fetchData, setStorage } from '@/utils'
+import { STORAGE_TOKEN, STORAGE_USER, fetchData, fetchDataNoAuth, setStorage } from '@/utils'
 import { type AuthLogin } from '../models/login.model'
 
 const userLogin = async (url: string, { arg }: { arg: AuthLogin }): Promise<any> => {
@@ -8,7 +8,8 @@ const userLogin = async (url: string, { arg }: { arg: AuthLogin }): Promise<any>
     headers: { 'Content-Type': 'application/json' }
   }
 
-  const data = await fetchData(url, options)
+  const data = await fetchDataNoAuth(url, options)
+  console.log('data', data)
   if (data.data.accessToken) {
     setStorage(STORAGE_TOKEN, data.data.accessToken as string)
   }
