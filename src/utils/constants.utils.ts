@@ -1,8 +1,3 @@
-export enum ROLE {
-  BASIC = 'basic',
-  ADMIN = 'admin',
-}
-
 export enum GENDER {
   MASCULINO = 'masculino',
   FEMENINO = 'femenino',

@@ -22,7 +22,7 @@ const useCreateResource = <TData>({ endpoint, query, isImage }: ParamResurce) =>
   return { createResource: trigger, isMutating, error }
 }
 
-const useCreateResourceNoAuth = <TData>({ endpoint, query, isImage }: ParamResurce) => {
+const useCreateResourceNoAuth = <TData>({ endpoint, query }: ParamResurce) => {
   const url = buildUrl({ endpoint, query })
   const { trigger, isMutating, error } = useSWRMutation<Promise<void>, ResponseError, string, TData>(
     url, query ? getResource : createResourceNoAuth

@@ -1,5 +1,5 @@
-import { CircleUser, LogOut, Menu, Settings, User } from 'lucide-react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { CircleUser, LogOut, Menu } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet'
@@ -7,19 +7,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import Navigation from './navigation'
 import { useAuth, useHeader } from '@/hooks'
-import { PrivateRoutes } from '@/models'
-import { Notificaciones } from './notificaciones'
+// import { PrivateRoutes } from '@/models'
 import { AppConfig } from '@/config'
 
 const Header = () => {
   const { breadcrumb } = useHeader()
   const { signOut } = useAuth()
-  const navigate = useNavigate()
-  const location = useLocation()
+  // const navigate = useNavigate()
 
   return (
     <header className="flex h-14 items-center gap-4 border-b px-4 lg:h-[60px] lg:px-6 dark:bg-dark-bg-secondary bg-light-bg-primary">
-      {location.pathname !== '/' && <Sheet>
+      <Sheet>
         <SheetTrigger asChild>
           <Button
             variant="outline"
@@ -38,7 +36,7 @@ const Header = () => {
           </SheetHeader>
           <Navigation />
         </SheetContent>
-      </Sheet>}
+      </Sheet>
       <div className="w-full flex-1">
         <Breadcrumb>
           <BreadcrumbList>
@@ -56,7 +54,6 @@ const Header = () => {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <Notificaciones></Notificaciones>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
@@ -67,14 +64,14 @@ const Header = () => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Mi cuenta</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => { navigate(PrivateRoutes.PROFILE) }} className='cursor-pointer'>
+          {/* <DropdownMenuItem onClick={() => { navigate(PrivateRoutes.PROFILE) }} className='cursor-pointer'>
             <User className="mr-2 h-4 w-4" />
             Perfil
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => { navigate(PrivateRoutes.SETTINGS) }} className='cursor-pointer'>
             <Settings className="mr-2 h-4 w-4" />
             Configuración
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={signOut} className='cursor-pointer'>
             <LogOut className="mr-2 h-4 w-4" />
