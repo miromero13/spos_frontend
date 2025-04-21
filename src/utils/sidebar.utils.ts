@@ -58,7 +58,7 @@ export const MenuSideBar: MenuHeaderRoute[] = [
         label: 'Carrito de Compras',
         icon: createElement(ShoppingCartIcon, { width: 20, height: 20 }),
         path: PrivateRoutes.SALE_CREATE,
-        permissions: [PERMISSION.ADMIN, PERMISSION.CASHIER] as PERMISSION[]
+        permissions: [PERMISSION.CASHIER] as PERMISSION[]
       }
     ]
   }
