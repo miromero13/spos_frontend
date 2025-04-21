@@ -1,6 +1,6 @@
 import { PrivateRoutes } from '@/models'
 import { PERMISSION } from '@/modules/auth/utils/permissions.constants'
-import { BoxIcon, CircleDollarSignIcon, ShoppingBagIcon, User, UserCogIcon, UsersIcon } from 'lucide-react'
+import { BoxIcon, CircleDollarSignIcon, ShoppingBagIcon, ShoppingCartIcon, User, UserCogIcon, UsersIcon } from 'lucide-react'
 import { createElement } from 'react'
 
 export interface MenuHeaderRoute {
@@ -53,6 +53,12 @@ export const MenuSideBar: MenuHeaderRoute[] = [
         icon: createElement(BoxIcon, { width: 20, height: 20 }),
         path: PrivateRoutes.CASH_CONTROL,
         permissions: [PERMISSION.CASHIER] as PERMISSION[]
+      },
+      {
+        label: 'Carrito de Compras',
+        icon: createElement(ShoppingCartIcon, { width: 20, height: 20 }),
+        path: PrivateRoutes.SALE_CREATE,
+        permissions: [PERMISSION.ADMIN, PERMISSION.CASHIER] as PERMISSION[]
       }
     ]
   }
