@@ -4,6 +4,8 @@ import { PERMISSION } from '@/modules/auth/utils/permissions.constants'
 
 const ProductPage = lazy(() => import('@modules/sales/pages/products'))
 const ProductFormPage = lazy(() => import('@modules/sales/pages/products/components/product-form'))
+const CashPage = lazy(() => import('@modules/sales/pages/cashes'))
+const CashControlPage = lazy(() => import('@modules/sales/pages/cashes/components/cash-control'))
 
 export const productRoutes: Route[] = [
   {
@@ -20,5 +22,15 @@ export const productRoutes: Route[] = [
     path: PrivateRoutes.PRODUCT_EDIT,
     element: createElement(ProductFormPage, { buttonText: 'Actualizar Producto', title: 'Editar Producto' }),
     permissions: [PERMISSION.ADMIN] as PERMISSION[]
+  },
+  {
+    path: PrivateRoutes.CASH,
+    element: createElement(CashPage),
+    permissions: [PERMISSION.ADMIN] as PERMISSION[]
+  },
+  {
+    path: PrivateRoutes.CASH_CONTROL,
+    element: createElement(CashControlPage),
+    permissions: [PERMISSION.CASHIER] as PERMISSION[]
   }
 ]

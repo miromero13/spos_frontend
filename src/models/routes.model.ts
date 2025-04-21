@@ -21,6 +21,10 @@ export enum PrivateRoutes {
   PRODUCT = '/productos',
   PRODUCT_CREATE = '/productos/crear',
   PRODUCT_EDIT = '/productos/:id',
+
+  // cashes
+  CASH = '/cajas',
+  CASH_CONTROL = '/cajas/control'
 }
 
 export interface Route {
