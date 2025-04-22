@@ -18,6 +18,7 @@ import { Badge } from '@/components/ui/badge'
 
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import { formatDate } from '../sales'
 
 const CashPage = (): JSX.Element => {
   const exportToPDF = () => {
@@ -109,7 +110,7 @@ const CashPage = (): JSX.Element => {
       </div>
       <Card x-chunk="dashboard-06-chunk-0" className='flex flex-col overflow-hidden w-full relative'>
         <CardHeader>
-          <CardTitle>Todos los Cajeros</CardTitle>
+          <CardTitle>Historial de cajas</CardTitle>
         </CardHeader>
         <CardContent className='overflow-hidden relative w-full'>
           <div className='overflow-x-auto'>
@@ -131,7 +132,7 @@ const CashPage = (): JSX.Element => {
                   ? <Skeleton rows={filterOptions.limit} columns={8} />
                   : allCashs?.map((cash: Cash) => (
                     <TableRow key={cash.id}>
-                      <TableCell>{new Date(cash.opening).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' })}</TableCell>
+                      <TableCell>{formatDate(cash.opening)}</TableCell>
                       <TableCell>{cash.initial_balance}</TableCell>
                       <TableCell>{cash.sales_total}</TableCell>
                       <TableCell>{cash.purchases_total}</TableCell>
