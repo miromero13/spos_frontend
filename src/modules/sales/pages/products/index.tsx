@@ -88,7 +88,7 @@ const ProductPage = (): JSX.Element => {
       </div>
       <Card x-chunk="dashboard-06-chunk-0" className='flex flex-col overflow-hidden w-full relative'>
         <CardHeader>
-          <CardTitle>Todos los Productos</CardTitle>
+          <CardTitle>Todos los productos</CardTitle>
         </CardHeader>
         <CardContent className='overflow-hidden relative w-full'>
           <div className='overflow-x-auto'>

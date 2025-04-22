@@ -14,7 +14,6 @@ import { PrivateRoutes } from '@/models/routes.model'
 import {
   useCreateProduct,
   useGetProduct
-  // ,useUpdateProduct
 } from '@/modules/sales/hooks/useProduct'
 import {
   useCreateCategory,
@@ -78,10 +77,10 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
     { label: title }
   ])
   const { id } = useParams()
-  console.log(id)
   const navigate = useNavigate()
   const { createProduct, isMutating } = useCreateProduct()
   // const { updateProduct } = useUpdateProduct()
+  // const { updateResource: updateProduct } = useUpdateResource({ endpoint: `/api/products/${id}/` })
   const { product } = useGetProduct(id)
   const { allCategories, mutate } = useGetAllCategory()
 
@@ -102,12 +101,12 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
 
   const onSubmit = (data: FormData) => {
     if (id) {
-      // toast.promise(updateProduct({ id, ...data }), {
+      // toast.promise(updateProduct(data), {
       //   loading: 'Actualizando producto...',
       //   success: () => {
-      //     setTimeout(() => {
-      //       navigate(PrivateRoutes.PRODUCT, { replace: true })
-      //     }, 1000)
+      //     // setTimeout(() => {
+      //     //   navigate(PrivateRoutes.PRODUCT, { replace: true })
+      //     // }, 1000)
       //     return 'Producto actualizado exitosamente'
       //   },
       //   error(error) {
