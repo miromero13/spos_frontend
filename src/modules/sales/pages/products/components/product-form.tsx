@@ -40,6 +40,9 @@ const formSchema = z.object({
     .string({ required_error: 'El nombre es requerido' })
     .min(3, 'Mínimo 3 caracteres')
     .max(100),
+  photo_url: z
+    .string()
+    .optional(),
   description: z
     .string({ required_error: 'La descripción es requerida' })
     .min(3, 'Mínimo 3 caracteres')
@@ -88,6 +91,7 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
     resolver: zodResolver(formSchema),
     values: {
       name: product?.name ?? '',
+      photo_url: product?.photo_url ?? '',
       description: product?.description ?? '',
       stock_minimum: product?.stock_minimum ?? 0,
       stock: product?.stock ?? 0,
@@ -186,6 +190,22 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
                         <FormControl>
                           <Input
                             placeholder="Ingresa el nombre del producto"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name='photo_url'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Imagen Url</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Ingresa la Url de tu imagen"
                             {...field}
                           />
                         </FormControl>
