@@ -318,7 +318,7 @@ const SalePage = (): JSX.Element => {
                     <Card key={product.id} className="">
                       <CardHeader>
                         <img
-                          src={'/path/to/default-image.jpg'}
+                          src={product?.photo_url || '/path/to/default-image.jpg'}
                           alt={product.name}
                           className="w-full h-28 object-cover bg-gray-200"
                         />
