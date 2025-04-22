@@ -1,6 +1,6 @@
 import { PrivateRoutes } from '@/models'
 import { PERMISSION } from '@/modules/auth/utils/permissions.constants'
-import { BoxIcon, CircleDollarSignIcon, ShoppingBagIcon, ShoppingCartIcon, User, UserCogIcon, UsersIcon } from 'lucide-react'
+import { BoxIcon, CircleDollarSignIcon, HandCoins, ShoppingBagIcon, ShoppingCartIcon, User, UserCogIcon, UsersIcon } from 'lucide-react'
 import { createElement } from 'react'
 
 export interface MenuHeaderRoute {
@@ -43,22 +43,28 @@ export const MenuSideBar: MenuHeaderRoute[] = [
         permissions: [PERMISSION.ADMIN] as PERMISSION[]
       },
       {
-        label: 'Cajas',
+        label: 'Historial de cajas',
         icon: createElement(BoxIcon, { width: 20, height: 20 }),
         path: PrivateRoutes.CASH,
         permissions: [PERMISSION.ADMIN] as PERMISSION[]
       },
+      // {
+      //   label: 'Control de Cajas',
+      //   icon: createElement(BoxIcon, { width: 20, height: 20 }),
+      //   path: PrivateRoutes.CASH_CONTROL,
+      //   permissions: [PERMISSION.CASHIER] as PERMISSION[]
+      // },
       {
-        label: 'Control de Cajas',
-        icon: createElement(BoxIcon, { width: 20, height: 20 }),
-        path: PrivateRoutes.CASH_CONTROL,
-        permissions: [PERMISSION.CASHIER] as PERMISSION[]
-      },
-      {
-        label: 'Carrito de Compras',
+        label: 'Vender',
         icon: createElement(ShoppingCartIcon, { width: 20, height: 20 }),
         path: PrivateRoutes.SALE_CREATE,
         permissions: [PERMISSION.CASHIER] as PERMISSION[]
+      },
+      {
+        label: 'Historial de Ventas',
+        icon: createElement(HandCoins, { width: 20, height: 20 }),
+        path: PrivateRoutes.SALE,
+        permissions: [PERMISSION.ADMIN] as PERMISSION[]
       }
     ]
   }
