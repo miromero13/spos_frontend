@@ -44,7 +44,7 @@ const useGetAllResource = <T>({ endpoint, isPagination }: ParamResurce) => {
   return { allResource: data?.data as T[], countData: data?.countData ?? 0, error, isLoading, mutate, changeOrder, filterOptions, newPage, prevPage, search, setFilterOptions, setOffset }
 }
 
-const useUpdateResource = <TData>(endpoint: string, id?: string) => {
+const useUpdateResource = <TData>({ endpoint, id }: ParamResurce) => {
   const url = buildUrl({ endpoint, id })
   console.log(url)
   const { trigger, isMutating, error } =
