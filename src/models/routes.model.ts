@@ -29,6 +29,9 @@ export enum PrivateRoutes {
   // sales
   SALE = '/ventas',
   SALE_CREATE = '/ventas/crear',
+
+  // orders
+  ORDERS = '/ordenes',
 }
 
 export interface Route {

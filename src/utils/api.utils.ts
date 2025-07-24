@@ -23,7 +23,10 @@ export const ENDPOINTS = {
   CASH_CLOSE: '/api/cash_registers/close_current_register/',
 
   // sale
-  SALE: '/api/sales/'
+  SALE: '/api/sales/',
+
+  // orders
+  ORDERS: '/api/orders/'
 }
 
 export const API_BASEURL = AppConfig.API_URL
