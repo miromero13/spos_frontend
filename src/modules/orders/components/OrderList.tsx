@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Package, MapPin, User, DollarSign, Clock } from 'lucide-react';
+import { Package, MapPin, User, Clock } from 'lucide-react';
 import OrderDetailModal from './OrderDetailModal';
 
 interface OrderListProps {

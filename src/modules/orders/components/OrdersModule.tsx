@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, Package, User, CreditCard, MapPin, DollarSign } from 'lucide-react';
+import { ArrowLeft, Package, User, CreditCard, MapPin } from 'lucide-react';
 
 const OrdersModule: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
