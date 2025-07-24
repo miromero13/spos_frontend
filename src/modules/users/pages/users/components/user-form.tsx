@@ -48,9 +48,9 @@ const baseSchema = z.object({
       return roles.includes(value as Role)
     }, 'Rol inválido'),
   phone: z
-    .number()
-    .int('Debe ser un número entero')
-    .optional()
+    .string()
+    .min(1, 'El teléfono es requerido')
+    .max(20)
 })
 
 const createSchema = baseSchema.extend({
@@ -85,14 +85,14 @@ const UserFormPage = ({ buttonText, title }: IFormProps) => {
       name: user?.name ?? '',
       password: id ? '' : user?.password ?? '',
       role: Role.CASHIER,
-      phone: user?.phone ?? 0
+      phone: user?.phone ? String(user.phone) : ''
     }
   })
   type FormData = z.infer<typeof createSchema> | z.infer<typeof editSchema>
 
   const onSubmit = (data: FormData) => {
     if (id) {
-      toast.promise(updateUser({ id, ...data, password: data.password ?? '' }), {
+      toast.promise(updateUser({ id, ...data, password: data.password ?? '', phone: Number(data.phone) }), {
         loading: 'Actualizando cajero...',
         success: () => {
           setTimeout(() => {
@@ -105,7 +105,7 @@ const UserFormPage = ({ buttonText, title }: IFormProps) => {
         }
       })
     } else {
-      toast.promise(createUser({ ...data, password: data.password ?? '' }), {
+      toast.promise(createUser({ ...data, password: data.password ?? '', phone: Number(data.phone) }), {
         loading: 'Creando cajero...',
         success: () => {
           setTimeout(() => {
@@ -233,24 +233,24 @@ const UserFormPage = ({ buttonText, title }: IFormProps) => {
                     )}
                   />
                 </div>
-                { !id && (
+                {!id && (
                   <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Contraseña</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="************"
-                          type="password"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />)}
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Contraseña</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="************"
+                            type="password"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />)}
               </CardContent>
             </Card>
           </div>

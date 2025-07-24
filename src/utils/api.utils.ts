@@ -20,7 +20,13 @@ export const ENDPOINTS = {
   // cash
   CASH: '/api/cash_registers/',
   CASH_VALIDATE: '/api/cash_registers/validate_user_cash_register/',
-  CASH_CLOSE: '/api/cash_registers/close_current_register/'
+  CASH_CLOSE: '/api/cash_registers/close_current_register/',
+
+  // sale
+  SALE: '/api/sales/',
+
+  // orders
+  ORDERS: '/api/orders/'
 }
 
 export const API_BASEURL = AppConfig.API_URL

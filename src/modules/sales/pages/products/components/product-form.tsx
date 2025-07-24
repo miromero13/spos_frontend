@@ -14,7 +14,6 @@ import { PrivateRoutes } from '@/models/routes.model'
 import {
   useCreateProduct,
   useGetProduct
-  // ,useUpdateProduct
 } from '@/modules/sales/hooks/useProduct'
 import {
   useCreateCategory,
@@ -41,6 +40,9 @@ const formSchema = z.object({
     .string({ required_error: 'El nombre es requerido' })
     .min(3, 'Mínimo 3 caracteres')
     .max(100),
+  photo_url: z
+    .string()
+    .optional(),
   description: z
     .string({ required_error: 'La descripción es requerida' })
     .min(3, 'Mínimo 3 caracteres')
@@ -78,10 +80,10 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
     { label: title }
   ])
   const { id } = useParams()
-  console.log(id)
   const navigate = useNavigate()
   const { createProduct, isMutating } = useCreateProduct()
   // const { updateProduct } = useUpdateProduct()
+  // const { updateResource: updateProduct } = useUpdateResource({ endpoint: `/api/products/${id}/` })
   const { product } = useGetProduct(id)
   const { allCategories, mutate } = useGetAllCategory()
 
@@ -89,6 +91,7 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
     resolver: zodResolver(formSchema),
     values: {
       name: product?.name ?? '',
+      photo_url: product?.photo_url ?? '',
       description: product?.description ?? '',
       stock_minimum: product?.stock_minimum ?? 0,
       stock: product?.stock ?? 0,
@@ -102,12 +105,12 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
 
   const onSubmit = (data: FormData) => {
     if (id) {
-      // toast.promise(updateProduct({ id, ...data }), {
+      // toast.promise(updateProduct(data), {
       //   loading: 'Actualizando producto...',
       //   success: () => {
-      //     setTimeout(() => {
-      //       navigate(PrivateRoutes.PRODUCT, { replace: true })
-      //     }, 1000)
+      //     // setTimeout(() => {
+      //     //   navigate(PrivateRoutes.PRODUCT, { replace: true })
+      //     // }, 1000)
       //     return 'Producto actualizado exitosamente'
       //   },
       //   error(error) {
@@ -187,6 +190,22 @@ const ProductFormPage = ({ buttonText, title }: IFormProps) => {
                         <FormControl>
                           <Input
                             placeholder="Ingresa el nombre del producto"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name='photo_url'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Imagen Url</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Ingresa la Url de tu imagen"
                             {...field}
                           />
                         </FormControl>

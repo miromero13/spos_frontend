@@ -10,6 +10,7 @@ export interface Product extends ApiBase {
   sale_price: number
   is_active: boolean
   category: Category
+  photo_url: string
 }
 
 export interface CreateProduct extends Partial<Omit<Product, 'category'>> {

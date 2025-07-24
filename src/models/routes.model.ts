@@ -24,7 +24,14 @@ export enum PrivateRoutes {
 
   // cashes
   CASH = '/cajas',
-  CASH_CONTROL = '/cajas/control'
+  CASH_CONTROL = '/cajas/control',
+
+  // sales
+  SALE = '/ventas',
+  SALE_CREATE = '/ventas/crear',
+
+  // orders
+  ORDERS = '/ordenes',
 }
 
 export interface Route {

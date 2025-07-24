@@ -14,12 +14,11 @@ import { type Customer } from '../../models/customer.model'
 import { useHeader } from '@/hooks'
 import { Input } from '@/components/ui/input'
 import useDebounce from '@/hooks/useDebounce'
-import { Badge } from '@/components/ui/badge'
 
 const CustomerPage = (): JSX.Element => {
   useHeader([
     { label: 'Dashboard', path: PrivateRoutes.DASHBOARD },
-    { label: 'Cajeros' }
+    { label: 'Clientes' }
   ])
   const navigate = useNavigate()
   const { allCustomers, countData, isLoading, filterOptions, newPage, prevPage, setOffset, search } = useGetAllCustomer()
@@ -72,7 +71,7 @@ const CustomerPage = (): JSX.Element => {
       </div>
       <Card x-chunk="dashboard-06-chunk-0" className='flex flex-col overflow-hidden w-full relative'>
         <CardHeader>
-          <CardTitle>Todos los Cajeros</CardTitle>
+          <CardTitle>Todos mis clientes</CardTitle>
         </CardHeader>
         <CardContent className='overflow-hidden relative w-full'>
           <div className='overflow-x-auto'>
@@ -83,7 +82,7 @@ const CustomerPage = (): JSX.Element => {
                   <TableHead>Email</TableHead>
                   <TableHead>Telefono</TableHead>
                   <TableHead>Carnet de Identidad</TableHead>
-                  <TableHead>Estado</TableHead>
+                  {/* <TableHead>Estado</TableHead> */}
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -95,11 +94,11 @@ const CustomerPage = (): JSX.Element => {
                       <TableCell>{customer.email}</TableCell>
                       <TableCell>{customer.phone}</TableCell>
                       <TableCell>{customer.ci}</TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <Badge variant={customer.is_active ? 'default' : 'outline'}>
                           {customer.is_active ? 'Activo' : 'Inactivo'}
                         </Badge>
-                      </TableCell>
+                      </TableCell> */}
                       {/* <TableCell>
                         <DropdownMenu onOpenChange={() => { setIsDialogOpen(false) }}>
                           <DropdownMenuTrigger asChild>

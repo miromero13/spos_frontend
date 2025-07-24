@@ -1,5 +1,5 @@
 import { createElement, lazy } from 'react'
-import { productRoutes, userRoutes } from '.'
+import { productRoutes, userRoutes, orderRoutes } from '.'
 import { PrivateRoutes, type Route } from '@/models/routes.model'
 import { type PERMISSION } from '@/modules/auth/utils/permissions.constants'
 
@@ -24,5 +24,7 @@ export const PrivateAllRoutes: Route[] = [
   //   permissions: [] as PERMISSION[]
   // },
   ...userRoutes,
-  ...productRoutes
+  ...productRoutes,
+  ...orderRoutes
 ]
+

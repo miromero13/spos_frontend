@@ -92,7 +92,7 @@ const UserPage = (): JSX.Element => {
       </div>
       <Card x-chunk="dashboard-06-chunk-0" className='flex flex-col overflow-hidden w-full relative'>
         <CardHeader>
-          <CardTitle>Todos los Cajeros</CardTitle>
+          <CardTitle>Todos los cajeros</CardTitle>
         </CardHeader>
         <CardContent className='overflow-hidden relative w-full'>
           <div className='overflow-x-auto'>
@@ -100,7 +100,9 @@ const UserPage = (): JSX.Element => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Nombre</TableHead>
+                  <TableHead>Carnet</TableHead>
                   <TableHead>Email</TableHead>
+                  <TableHead>Teléfono</TableHead>
                   {/* <TableHead>Rol</TableHead> */}
                   <TableHead>Estado</TableHead>
                   <TableHead><span className='sr-only'>Opciones</span></TableHead>
@@ -112,7 +114,9 @@ const UserPage = (): JSX.Element => {
                   : allUsers?.map((user: User) => (
                     <TableRow key={user.id}>
                       <TableCell>{user.name}</TableCell>
+                      <TableCell>{user.ci}</TableCell>
                       <TableCell>{user.email}</TableCell>
+                      <TableCell>{user.phone}</TableCell>
                       {/* <TableCell>{user.role}</TableCell> */}
                       <TableCell>
                         <Badge variant={user.is_active ? 'default' : 'outline'}>
